@@ -105,19 +105,21 @@ secondButton.addActionListener(this);
 
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
-if(buttonPressed==firstButton) {
+		if(buttonPressed==firstButton) {
 		// Call the askQuestion() method
 askQuestion("what kind of element is helium?(nothing but the words, no capitals)","noble gas",200);
 		// Complete the code in the askQuestion() method. When you play the game, the
 		// score should change.
-}
+firstButton.setText("");
+		}
 		// If the buttonPressed was the secondButton
-
+		if(buttonPressed==secondButton) {
 		// Call the askQuestion() method with a harder question
-
+askQuestion("What is the atomic number of the first Lanthanide?(Numbers, not words)", "57", 400);
 		// Clear the text on the button that was pressed (set the button text to
 		// nothing)
-
+		secondButton.setText("");
+		}
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
@@ -127,26 +129,28 @@ askQuestion("what kind of element is helium?(nothing but the words, no capitals)
 playJeopardyTheme();
 		// Remove this temporary message and replace it with a pop-up that asks the user
 		// the question
-		JOptionPane.showMessageDialog(null, question);
+		String answer = JOptionPane.showInputDialog(question);
 
 		// Stop the theme music when they have entered their response. Hint: use the
 		// sound variable
-
+sound.stop();
 		// If the answer is correct
-
+if(answer.equals(correctAnswer)) {
 		// Increase the score by the prizeMoney
-
+score+=prizeMoney;
 		// Pop up a message to tell the user they were correct
-
+JOptionPane.showMessageDialog(null, "Correct!");
+}
 		// Otherwise
-
+else {
 		// Decrement the score by the prizeMoney
-
+score-=prizeMoney;
 		// Pop up a message to tell the user they were wrong and give them the correct
 		// answer
-
+JOptionPane.showMessageDialog(null, "That was incorrect. The correct answer is " + correctAnswer);
+}
 		// Call the updateScore() method
-
+updateScore();
 	}
 
 	public void playJeopardyTheme() {
