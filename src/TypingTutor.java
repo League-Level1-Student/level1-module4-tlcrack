@@ -1,14 +1,17 @@
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class TypingTutor implements KeyListener {
 	JFrame frame = new JFrame();
 	char currentLetter;
 	JLabel lab = new JLabel();
+	JPanel pan = new JPanel();
 	public static void main(String[] args) {
 		TypingTutor tt = new TypingTutor();
 		tt.GUI();
@@ -22,7 +25,7 @@ public class TypingTutor implements KeyListener {
 		frame.setSize(400, 150);
 		frame.setTitle("Type or Die");
 		
-		frame.add(lab);
+		pan.add(lab);
 
 		currentLetter = generateRandomLetter();
 		lab.setText("" + currentLetter);
@@ -30,7 +33,8 @@ public class TypingTutor implements KeyListener {
 		lab.setFont(lab.getFont().deriveFont(28.0f));
 		lab.setHorizontalAlignment(JLabel.CENTER);
 		frame.addKeyListener(this);
-
+		
+		frame.add(pan);
 	}
 
 	char generateRandomLetter() {
@@ -41,7 +45,14 @@ public class TypingTutor implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(	("you typed " + currentLetter));
+		System.out.println(	("you typed " + e.getKeyChar()));
+		if(e.getKeyChar()==currentLetter) {
+			System.out.println("Correct!");
+			pan.setBackground(new Color(119, 255, 85));
+		}
+		else {
+			pan.setBackground(new Color(255, 51, 0));
+		}
 	}
 
 	@Override
