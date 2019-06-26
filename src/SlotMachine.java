@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class SlotMachine implements ActionListener {
@@ -19,6 +20,8 @@ public class SlotMachine implements ActionListener {
 	JLabel f1;
 	JLabel f2;
 	JLabel f3;
+	boolean youWin = false;
+	int money = 0;
 public static void main(String[] args) throws MalformedURLException {
 	SlotMachine SL = new SlotMachine();
 	SL.GUI();
@@ -35,7 +38,6 @@ void GUI() throws MalformedURLException {
 
 	tooLong();
 
-	pan.add(but);
 	but.addActionListener(this);
 	
 	fra.pack();
@@ -74,12 +76,15 @@ void tooLong() throws MalformedURLException {
 	}
 	if(yeet==2) {
 		f3 = createLabelImage("Fox3.png");
-
+		if(r==$&&r==yeet) {
+			youWin=true;
+		}
 	}
 
 	pan.add(f1);
 	pan.add(f2);
 	pan.add(f3);
+	pan.add(but);
 }
 
 private JLabel createLabelImage(String fileName) throws MalformedURLException{
@@ -95,14 +100,24 @@ return imageLabel;
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
-	
+	pan.remove(f1);
+	pan.remove(f2);
+	pan.remove(f3);
+	pan.remove(but);
 	try {
 		tooLong();
 	} catch (MalformedURLException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
+money +=1;
 
+JOptionPane.showMessageDialog(null, "That'll be $" + money);
+
+fra.pack();
+if(youWin) {
+	JOptionPane.showMessageDialog(null, "You won! Now pay up.");
+}
 }
 
 
